@@ -147,7 +147,10 @@ string readFile(string filename){
             isEmpty = false;
             cout<<line<<endl;
         }
-        cout<<"\e[1;31m""(File is empty)""\e[0m"<<endl;
+        if(isEmpty){
+            cout<<"\e[1;31m""(File is empty)""\e[0m"<<endl;
+        }
+        
         cout << "=====================================\n";
         return "\e[1;32m""  File Read successfully.""\e[0m";
     }

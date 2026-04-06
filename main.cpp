@@ -5,6 +5,8 @@
 #include <limits>
 
 #define BASE_DIR "./notes/"
+
+// Namespaces
 using namespace std;
 namespace fs = filesystem;
 
@@ -14,14 +16,17 @@ bool fileExists(string filename){
     return exists;
 }
 
-
+// Function Definations
 string createFile(string filename);
 void listFiles();
+
+// Main Function
 int main() {
 
     if (!fs::exists(BASE_DIR)) {
     fs::create_directory(BASE_DIR);
-}
+    }
+
     bool appRunning = true;
     cout<<"\e[36m";
     cout<<R"(
@@ -35,21 +40,23 @@ int main() {
     cout<<"\n"<<endl;
     cout<<"\e[0m";
 
+
+// Event Loop
     while(appRunning){
         int choice = 0;
-    cout << "=====================================\n";
-    cout << "|             \e[33mMAIN MENU\e[0m             |\n";
-    cout << "=====================================\n";
-    cout << "| 1. Create New File               |\n";
-    cout << "| 2. Read File                     |\n";
-    cout << "| 3. Write File                    |\n";
-    cout << "| 4. List Files                    |\n";
-    cout << "| 5. Exit                          |\n";
-    cout << "=====================================\n";
-    cout << "  Enter your choice: ";
-    cin>>choice;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "=====================================\n";
+        cout << "=====================================\n";
+        cout << "|             \e[33mMAIN MENU\e[0m             |\n";
+        cout << "=====================================\n";
+        cout << "| 1. Create New File               |\n";
+        cout << "| 2. Read File                     |\n";
+        cout << "| 3. Write File                    |\n";
+        cout << "| 4. List Files                    |\n";
+        cout << "| 5. Exit                          |\n";
+        cout << "=====================================\n";
+        cout << "  Enter your choice: ";
+        cin>>choice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "=====================================\n";
         string filename, text;
 
         switch(choice){
@@ -83,7 +90,7 @@ int main() {
     return 0;
 }
 
-
+// Secondary Functions
 
 string createFile(string filename){
 
@@ -92,7 +99,7 @@ string createFile(string filename){
     if (exists){
         string message = "\e[31m""  File already exists.""\e[0m";
         return message;
-        }
+    }
 
     ofstream file(BASE_DIR+filename);
 
@@ -121,12 +128,10 @@ void listFiles(){
                 cout<<"Folder: "<<entry.path().filename()<<endl;
             }
         } 
-
-    string dummy;
-    cout << "\nPress Enter to continue...";
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    getline(cin, dummy);
-
+        string dummy;
+        cout << "\nPress Enter to continue...";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, dummy);
     }
 }

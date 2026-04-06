@@ -20,6 +20,7 @@ bool fileExists(string filename){
 int getChoice();
 string createFile(string filename);
 void listFiles();
+string readFile(string filename);
 
 // Main Function
 int main() {
@@ -47,11 +48,11 @@ int main() {
         cout << "=====================================\n";
         cout << "|             \e[33mMAIN MENU\e[0m             |\n";
         cout << "=====================================\n";
-        cout << "| 1. Create New File               |\n";
-        cout << "| 2. Read File                     |\n";
-        cout << "| 3. Write File                    |\n";
-        cout << "| 4. List Files                    |\n";
-        cout << "| 5. Exit                          |\n";
+        cout << "| 1. Create New File                |\n";
+        cout << "| 2. Read File                      |\n";
+        cout << "| 3. Write File                     |\n";
+        cout << "| 4. List Files                     |\n";
+        cout << "| 5. Exit                           |\n";
         cout << "=====================================\n";
         cout << "  Enter your choice: ";
         choice = getChoice();
@@ -63,15 +64,18 @@ int main() {
             cout << "  Enter file name: ";
             getline(cin, filename);
             cout << "=====================================\n";
-            cout<<createFile(filename)<<endl;    
+            cout << createFile(filename)<<endl;    
   			break;
 
         case 2: 
-            cout<<"  Coming Soon ";
+            cout << "  Enter file name:  ";
+            getline(cin, filename);
+            cout << "=====================================\n";
+            cout << readFile(filename)<<endl; 
         	break;
 
         case 3: 
-            cout<<"  Coming Soon ";
+            cout<<"  Coming Soon"<<endl;
        		break;
 
         case 4: 
@@ -110,20 +114,44 @@ string createFile(string filename){
     bool exists = fileExists(filename);
 
     if (exists){
-        string message = "\e[31m""  File already exists.""\e[0m";
+        string message = "\e[1;31m""  File already exists.""\e[0m";
         return message;
     }
 
     ofstream file(BASE_DIR+filename);
 
     if(!file){
-        string message = "\e[31m""  Can't create file.""\e[0m";
+        string message = "\e[1;31m""  Can't create file.""\e[0m";
         return message;
     }
 
-    string message = "\e[32m""  File created successfully.""\e[0m";
+    string message = "\e[1;32m""  File created successfully.""\e[0m";
     file.close();
     return message;
+
+}
+
+string readFile(string filename){
+    bool exists = fileExists(filename);
+    bool isEmpty = true;
+    if (!exists){
+        return "\e[1;31m""  File doesn't exist""\e[0m";
+    }
+    else{
+        
+        string path = BASE_DIR+filename;
+        ifstream file(path);
+        string line;
+        cout<<"\e[1m""File content: ""\e[0m"<<endl;
+        while(getline(file, line)){
+            isEmpty = false;
+            cout<<line<<endl;
+        }
+        cout<<"\e[1;31m""(File is empty)""\e[0m"<<endl;
+        cout << "=====================================\n";
+        return "\e[1;32m""  File Read successfully.""\e[0m";
+    }
+    
 
 }
 

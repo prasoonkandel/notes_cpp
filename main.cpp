@@ -18,9 +18,9 @@ bool fileExists(string filename){
 
 // Function Definations
 int getChoice();
-string createFile(string filename);
+void createFile(string filename);
 void listFiles();
-string readFile(string filename);
+void readFile(string filename);
 
 // Main Function
 int main() {
@@ -64,14 +64,14 @@ int main() {
             cout << "  Enter file name: ";
             getline(cin, filename);
             cout << "=====================================\n";
-            cout << createFile(filename)<<endl;    
+            createFile(filename);   
   			break;
 
         case 2: 
             cout << "  Enter file name:  ";
             getline(cin, filename);
             cout << "=====================================\n";
-            cout << readFile(filename)<<endl; 
+            readFile(filename);
         	break;
 
         case 3: 
@@ -109,36 +109,31 @@ int getChoice(){
     }
     return choice;
 }
-string createFile(string filename){
+void createFile(string filename){
 
     bool exists = fileExists(filename);
 
     if (exists){
-        string message = "\e[1;31m""  File already exists.""\e[0m";
-        return message;
-    }
+        cout << "\e[1;31m""  File already exists.""\e[0m"<<endl;
+      }
 
     ofstream file(BASE_DIR+filename);
 
     if(!file){
-        string message = "\e[1;31m""  Can't create file.""\e[0m";
-        return message;
+        cout << "\e[1;31m""  Can't create file.""\e[0m"<<endl;
     }
-
-    string message = "\e[1;32m""  File created successfully.""\e[0m";
     file.close();
-    return message;
-
+    cout << "\e[1;32m""  File created successfully.""\e[0m"<<endl;
+    
 }
 
-string readFile(string filename){
+void readFile(string filename){
     bool exists = fileExists(filename);
     bool isEmpty = true;
     if (!exists){
-        return "\e[1;31m""  File doesn't exist""\e[0m";
+        cout << "\e[1;31m""  File doesn't exist""\e[0m"<<endl;
     }
     else{
-        
         string path = BASE_DIR+filename;
         ifstream file(path);
         string line;
@@ -152,7 +147,7 @@ string readFile(string filename){
         }
         
         cout << "=====================================\n";
-        return "\e[1;32m""  File Read successfully.""\e[0m";
+        cout << "\e[1;32m""  File Read successfully.""\e[0m"<<endl;
     }
     
 

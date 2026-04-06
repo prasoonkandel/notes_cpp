@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <limits>
+
 #define BASE_DIR "./notes/"
 using namespace std;
 namespace fs = filesystem;
@@ -21,7 +23,7 @@ int main() {
     fs::create_directory(BASE_DIR);
 }
     bool appRunning = true;
-    cout<<"\033[36m";
+    cout<<"\e[36m";
     cout<<R"(
 ███╗   ██╗ ██████╗ ████████╗███████╗███████╗     ██████╗██████╗ ██████╗ 
 ████╗  ██║██╔═══██╗╚══██╔══╝██╔════╝██╔════╝    ██╔════╝██╔══██╗██╔══██╗
@@ -31,12 +33,12 @@ int main() {
 ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝     ╚═════╝╚═╝     ╚═╝                                                                          
 )";
     cout<<"\n"<<endl;
-    cout<<"\033[0m";
+    cout<<"\e[0m";
 
     while(appRunning){
         int choice = 0;
     cout << "=====================================\n";
-    cout << "|             \033[33mMAIN MENU\033[0m             |\n";
+    cout << "|             \e[33mMAIN MENU\e[0m             |\n";
     cout << "=====================================\n";
     cout << "| 1. Create New File               |\n";
     cout << "| 2. Read File                     |\n";
@@ -45,9 +47,9 @@ int main() {
     cout << "| 5. Exit                          |\n";
     cout << "=====================================\n";
     cout << "  Enter your choice: ";
-    cin >> choice;
-    cin.ignore();
-     cout << "=====================================\n";
+    cin>>choice;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "=====================================\n";
         string filename, text;
 
         switch(choice){
@@ -67,7 +69,7 @@ int main() {
        		break;
 
         case 4: 
-            cout<<"  Coming Soon ";
+            listFiles();
             break;    
 
         case 5:
@@ -76,7 +78,7 @@ int main() {
             break;
 
         default:
-            cout<<"  Invalid option\n";
+            cout<<"\e[1;31m""  Invalid option\n""\e[0m";
         }}
     return 0;
 }
@@ -88,23 +90,43 @@ string createFile(string filename){
     bool exists = fileExists(filename);
 
     if (exists){
-        string message = "\033[31m""  File already exists.""\033[0m";
+        string message = "\e[31m""  File already exists.""\e[0m";
         return message;
         }
 
     ofstream file(BASE_DIR+filename);
 
     if(!file){
-        string message = "\033[31m""  Can't create file.""\033[0m";
+        string message = "\e[31m""  Can't create file.""\e[0m";
     }
 
-    string message = "\033[32m""  File created successfully.""\033[0m";
+    string message = "\e[32m""  File created successfully.""\e[0m";
     file.close();
     return message;
 
 }
 
 void listFiles(){
+    string path = BASE_DIR;
+    if(fs::is_empty(path)){
+        cout<<"There are no files saved.";
+    }
+    else{
+        cout<<"Listing Files:"<<endl;
+        for(const auto &entry : fs::directory_iterator(path)){
+            if(fs::is_regular_file(entry.status())){
+                cout<<"File: "<<entry.path().filename()<<endl;
+            }
+            else if(fs::is_directory(entry.status())){
+                cout<<"Folder: "<<entry.path().filename()<<endl;
+            }
+        } 
 
+    string dummy;
+    cout << "\nPress Enter to continue...";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, dummy);
 
+    }
 }

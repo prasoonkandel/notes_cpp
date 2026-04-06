@@ -17,12 +17,12 @@ bool fileExists(string filename){
 }
 
 // Function Definations
+int getChoice();
 string createFile(string filename);
 void listFiles();
 
 // Main Function
 int main() {
-
     if (!fs::exists(BASE_DIR)) {
     fs::create_directory(BASE_DIR);
     }
@@ -54,11 +54,10 @@ int main() {
         cout << "| 5. Exit                          |\n";
         cout << "=====================================\n";
         cout << "  Enter your choice: ";
-        cin>>choice;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        choice = getChoice();
         cout << "=====================================\n";
         string filename, text;
-
+        
         switch(choice){
         case 1: 
             cout << "  Enter file name: ";
@@ -92,6 +91,20 @@ int main() {
 
 // Secondary Functions
 
+int getChoice(){
+    int choice = 0;
+    if(cin>>choice) {
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return choice;
+    }
+    else {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        choice = 0;
+        return  choice;
+    }
+    return choice;
+}
 string createFile(string filename){
 
     bool exists = fileExists(filename);
@@ -105,6 +118,7 @@ string createFile(string filename){
 
     if(!file){
         string message = "\e[31m""  Can't create file.""\e[0m";
+        return message;
     }
 
     string message = "\e[32m""  File created successfully.""\e[0m";

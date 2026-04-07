@@ -1,8 +1,8 @@
 # Notes Cpp
 
-`Notes Cpp` is a simple terminal-based notes app built with C++.
+**Notes Cpp** is a simple terminal-based notes app built with C++.
 
-**Notice**: This project is still under development.
+### Latest Release: v1.0
 
 ## Features
 

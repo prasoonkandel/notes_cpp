@@ -37,17 +37,10 @@ int main() {
     fs::create_directories(getBaseDir());
     }
     bool appRunning = true;
-    cout<<"\e[36m";
-    cout<<R"(
-███╗   ██╗ ██████╗ ████████╗███████╗███████╗     ██████╗██████╗ ██████╗ 
-████╗  ██║██╔═══██╗╚══██╔══╝██╔════╝██╔════╝    ██╔════╝██╔══██╗██╔══██╗
-██╔██╗ ██║██║   ██║   ██║   █████╗  ███████╗    ██║     ██████╔╝██████╔╝
-██║╚██╗██║██║   ██║   ██║   ██╔══╝  ╚════██║    ██║     ██╔═══╝ ██╔═══╝ 
-██║ ╚████║╚██████╔╝   ██║   ███████╗███████║    ╚██████╗██║     ██║     
-╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝     ╚═════╝╚═╝     ╚═╝                                                                          
-)";
-    cout<<"\n"<<endl;
-    cout<<"\e[0m";
+    cout<<"\n";
+    cout<<"\e[1;36m";
+        cout << "#===============  NOTES CPP  ===============#\n";
+    cout<<"\e[0m"<<endl;
 // Event Loop
     while(appRunning){
         int choice = 0;
@@ -126,9 +119,7 @@ void createFile(string filename){
         cout << "\e[1;31m""  File already exists.""\e[0m"<<endl;
     }
     else{
-
-    ofstream file(getBaseDir()+filename);
-
+        ofstream file(getBaseDir()+filename);
         if(!file){
         cout << "\e[1;31m""  Can't create file.""\e[0m"<<endl;
         }

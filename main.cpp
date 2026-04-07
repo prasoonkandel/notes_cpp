@@ -1,17 +1,25 @@
 #include <iostream>
+#include <cstdlib>
 #include <fstream>
 #include <string>
 #include <filesystem>
 #include <limits>
 
-#define BASE_DIR "~/notes_cpp/"
-
 // Namespaces
 using namespace std;
 namespace fs = filesystem;
 
+// Getting Base Directory to store notes
+string getBaseDir() {
+    #ifdef _WIN32
+        return string(getenv("USERPROFILE")) + "\\notes_cpp\\";
+    #else
+        return string(getenv("HOME")) + "/notes_cpp/";
+    #endif
+}
+
 bool fileExists(string filename){
-    string path = BASE_DIR+filename;
+    string path = getBaseDir()+filename;
     bool exists = fs::exists(path);
     return exists;
 }
@@ -25,8 +33,8 @@ void readFile(string filename);
 void writeFile(string filenme);
 // Main Function
 int main() {
-    if (!fs::exists(BASE_DIR)) {
-    fs::create_directory(BASE_DIR);
+    if (!fs::exists(getBaseDir())) {
+    fs::create_directories(getBaseDir());
     }
     bool appRunning = true;
     cout<<"\e[36m";
@@ -119,7 +127,7 @@ void createFile(string filename){
     }
     else{
 
-    ofstream file(BASE_DIR+filename);
+    ofstream file(getBaseDir()+filename);
 
         if(!file){
         cout << "\e[1;31m""  Can't create file.""\e[0m"<<endl;
@@ -138,7 +146,7 @@ void readFile(string filename){
         cout << "\e[1;31m""  File doesn't exist""\e[0m"<<endl;
     }
     else{
-        string path = BASE_DIR+filename;
+        string path = getBaseDir()+filename;
         ifstream file(path);
         string line;
         cout<<"\e[1m""File content: ""\e[0m"<<endl;
@@ -169,7 +177,7 @@ void writeFile(string filename){
     cin>>*yn_ptr;
     cout << "==========================================\n";
     if (*yn_ptr == 'y' || *yn_ptr == 'Y'){
-        string path = BASE_DIR+filename;
+        string path = getBaseDir()+filename;
         ofstream file(path);
         if (!file){
             cout <<"\e[1;31m""  Unexpected error occured""\e[0m"<<endl;
@@ -198,7 +206,7 @@ void writeFile(string filename){
 }
 
 void listFiles(){
-    string path = BASE_DIR;
+    string path = getBaseDir();
     if(fs::is_empty(path)){
         cout<<"There are no files saved.";
     }

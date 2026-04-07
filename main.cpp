@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <limits>
 
-#define BASE_DIR "./notes/"
+#define BASE_DIR "~/notes_cpp/"
 
 // Namespaces
 using namespace std;
@@ -15,6 +15,7 @@ bool fileExists(string filename){
     bool exists = fs::exists(path);
     return exists;
 }
+
 
 // Function Definations
 int getChoice();
@@ -39,8 +40,6 @@ int main() {
 )";
     cout<<"\n"<<endl;
     cout<<"\e[0m";
-
-
 // Event Loop
     while(appRunning){
         int choice = 0;

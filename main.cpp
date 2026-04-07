@@ -12,7 +12,7 @@ namespace fs = filesystem;
 
 bool fileExists(string filename){
     string path = BASE_DIR+filename;
-    bool exists = std::filesystem::exists(path);
+    bool exists = fs::exists(path);
     return exists;
 }
 
@@ -21,13 +21,12 @@ int getChoice();
 void createFile(string filename);
 void listFiles();
 void readFile(string filename);
-
+void writeFile(string filenme);
 // Main Function
 int main() {
     if (!fs::exists(BASE_DIR)) {
     fs::create_directory(BASE_DIR);
     }
-
     bool appRunning = true;
     cout<<"\e[36m";
     cout<<R"(
@@ -45,37 +44,40 @@ int main() {
 // Event Loop
     while(appRunning){
         int choice = 0;
-        cout << "=====================================\n";
-        cout << "|             \e[33mMAIN MENU\e[0m             |\n";
-        cout << "=====================================\n";
-        cout << "| 1. Create New File                |\n";
-        cout << "| 2. Read File                      |\n";
-        cout << "| 3. Write File                     |\n";
-        cout << "| 4. List Files                     |\n";
-        cout << "| 5. Exit                           |\n";
-        cout << "=====================================\n";
+        cout << "==========================================\n";
+        cout << "|             \e[33mMAIN MENU\e[0m                  |\n";
+        cout << "==========================================\n";
+        cout << "| 1. Create New File                     |\n";
+        cout << "| 2. Read File                           |\n";
+        cout << "| 3. Write File                          |\n";
+        cout << "| 4. List Files                          |\n";
+        cout << "| 5. Exit                                |\n";
+        cout << "==========================================\n";
         cout << "  Enter your choice: ";
         choice = getChoice();
-        cout << "=====================================\n";
+        cout << "==========================================\n";
         string filename, text;
         
         switch(choice){
         case 1: 
             cout << "  Enter file name: ";
             getline(cin, filename);
-            cout << "=====================================\n";
+            cout << "==========================================\n";
             createFile(filename);   
   			break;
 
         case 2: 
             cout << "  Enter file name:  ";
             getline(cin, filename);
-            cout << "=====================================\n";
+            cout << "==========================================\n";
             readFile(filename);
         	break;
 
         case 3: 
-            cout<<"  Coming Soon"<<endl;
+            cout << "  Enter file name:  ";
+            getline(cin, filename);
+            cout << "==========================================\n";
+            writeFile(filename);
        		break;
 
         case 4: 
@@ -115,16 +117,19 @@ void createFile(string filename){
 
     if (exists){
         cout << "\e[1;31m""  File already exists.""\e[0m"<<endl;
-      }
+    }
+    else{
 
     ofstream file(BASE_DIR+filename);
 
-    if(!file){
+        if(!file){
         cout << "\e[1;31m""  Can't create file.""\e[0m"<<endl;
+        }
+        else{
+        file.close();
+        cout << "\e[1;32m""  File created successfully.""\e[0m"<<endl;
+        }   
     }
-    file.close();
-    cout << "\e[1;32m""  File created successfully.""\e[0m"<<endl;
-    
 }
 
 void readFile(string filename){
@@ -145,12 +150,52 @@ void readFile(string filename){
         if(isEmpty){
             cout<<"\e[1;31m""(File is empty)""\e[0m"<<endl;
         }
-        
-        cout << "=====================================\n";
+
+        cout << "==========================================\n";
         cout << "\e[1;32m""  File Read successfully.""\e[0m"<<endl;
     }
     
 
+}
+
+void writeFile(string filename){
+    bool exists = fileExists(filename);
+    if(!exists){
+        cout <<"\e[1;31m""  File doesn't exist.""\e[0m"<<endl;
+        return;
+    }
+    cout<<"  This program doesn't support editing file"<<endl;
+    cout<<"  Do you want to overwrite it? (y/n): ";
+    char *yn_ptr = new char;
+    cin>>*yn_ptr;
+    cout << "==========================================\n";
+    if (*yn_ptr == 'y' || *yn_ptr == 'Y'){
+        string path = BASE_DIR+filename;
+        ofstream file(path);
+        if (!file){
+            cout <<"\e[1;31m""  Unexpected error occured""\e[0m"<<endl;
+            return;
+        }
+        cout<< "  Write File content here (END for exit): "<<endl;
+        bool writting = true;
+        string *temp_line = new string;;
+        while(writting){
+            getline(cin, *temp_line);
+            if(*temp_line == "END"){
+                writting = false;
+                break;
+            }
+            file<<*temp_line<<endl;
+        }
+    } 
+    else if(*yn_ptr == 'n' || *yn_ptr == 'N'){
+        cout<< "\e[1;32m""  File saved without any changes""\e[0m"<<endl; 
+    }
+    else{
+        cout <<"\e[1;31m""  Invalid Input""\e[0m"<<endl;
+    }
+
+    delete yn_ptr;
 }
 
 void listFiles(){

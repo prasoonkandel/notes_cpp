@@ -194,6 +194,8 @@ void writeFile(string filename){
             }
             file<<*temp_line<<endl;
         }
+        delete temp_line;
+        file.close();
     } 
     else if(*yn_ptr == 'n' || *yn_ptr == 'N'){
         cout<< "\e[1;32m""  File saved without any changes""\e[0m"<<endl; 

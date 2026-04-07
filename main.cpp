@@ -55,8 +55,8 @@ int main() {
         cout << "|             \e[33mMAIN MENU\e[0m                  |\n";
         cout << "==========================================\n";
         cout << "| 1. Create New File                     |\n";
-        cout << "| 2. Read File                           |\n";
-        cout << "| 3. Write File                          |\n";
+        cout << "| 2. Write File                          |\n";
+        cout << "| 3. Read File                           |\n";
         cout << "| 4. List Files                          |\n";
         cout << "| 5. Exit                                |\n";
         cout << "==========================================\n";
@@ -77,14 +77,14 @@ int main() {
             cout << "  Enter file name:  ";
             getline(cin, filename);
             cout << "==========================================\n";
-            readFile(filename);
+            writeFile(filename);
         	break;
 
         case 3: 
             cout << "  Enter file name:  ";
             getline(cin, filename);
             cout << "==========================================\n";
-            writeFile(filename);
+            readFile(filename);
        		break;
 
         case 4: 

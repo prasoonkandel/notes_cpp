@@ -38,14 +38,14 @@ int main() {
     }
     bool appRunning = true;
     cout<<"\n";
-    cout<<"\e[1;36m";
+    cout<<"\033[1;36m";
         cout << "#===============  NOTES CPP  ===============#\n";
-    cout<<"\e[0m"<<endl;
+    cout<<"\033[0m"<<endl;
 // Event Loop
     while(appRunning){
         int choice = 0;
         cout << "==========================================\n";
-        cout << "|             \e[33mMAIN MENU\e[0m                  |\n";
+        cout << "|             \033[33mMAIN MENU\033[0m                  |\n";
         cout << "==========================================\n";
         cout << "| 1. Create New File                     |\n";
         cout << "| 2. Write File                          |\n";
@@ -90,7 +90,7 @@ int main() {
             break;
 
         default:
-            cout<<"\e[1;31m""  Invalid option\n""\e[0m";
+            cout<<"\033[1;31m""  Invalid option\n""\033[0m";
         }}
     return 0;
 }
@@ -116,16 +116,16 @@ void createFile(string filename){
     bool exists = fileExists(filename);
 
     if (exists){
-        cout << "\e[1;31m""  File already exists.""\e[0m"<<endl;
+        cout << "\033[1;31m""  File already exists.""\033[0m"<<endl;
     }
     else{
         ofstream file(getBaseDir()+filename);
         if(!file){
-        cout << "\e[1;31m""  Can't create file.""\e[0m"<<endl;
+        cout << "\033[1;31m""  Can't create file.""\033[0m"<<endl;
         }
         else{
         file.close();
-        cout << "\e[1;32m""  File created successfully.""\e[0m"<<endl;
+        cout << "\033[1;32m""  File created successfully.""\033[0m"<<endl;
         }   
     }
 }
@@ -134,23 +134,23 @@ void readFile(string filename){
     bool exists = fileExists(filename);
     bool isEmpty = true;
     if (!exists){
-        cout << "\e[1;31m""  File doesn't exist""\e[0m"<<endl;
+        cout << "\033[1;31m""  File doesn't exist""\033[0m"<<endl;
     }
     else{
         string path = getBaseDir()+filename;
         ifstream file(path);
         string line;
-        cout<<"\e[1m""File content: ""\e[0m"<<endl;
+        cout<<"\033[1m""File content: ""\033[0m"<<endl;
         while(getline(file, line)){
             isEmpty = false;
             cout<<line<<endl;
         }
         if(isEmpty){
-            cout<<"\e[1;31m""(File is empty)""\e[0m"<<endl;
+            cout<<"\033[1;31m""(File is empty)""\033[0m"<<endl;
         }
 
         cout << "==========================================\n";
-        cout << "\e[1;32m""  File Read successfully.""\e[0m"<<endl;
+        cout << "\033[1;32m""  File Read successfully.""\033[0m"<<endl;
     }
     
 
@@ -159,7 +159,7 @@ void readFile(string filename){
 void writeFile(string filename){
     bool exists = fileExists(filename);
     if(!exists){
-        cout <<"\e[1;31m""  File doesn't exist.""\e[0m"<<endl;
+        cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
         return;
     }
     cout<<"  This program doesn't support editing file"<<endl;
@@ -171,7 +171,7 @@ void writeFile(string filename){
         string path = getBaseDir()+filename;
         ofstream file(path);
         if (!file){
-            cout <<"\e[1;31m""  Unexpected error occured""\e[0m"<<endl;
+            cout <<"\033[1;31m""  Unexpected error occured""\033[0m"<<endl;
             return;
         }
         cout<< "  Write File content here (END for exit): "<<endl;
@@ -189,10 +189,10 @@ void writeFile(string filename){
         file.close();
     } 
     else if(*yn_ptr == 'n' || *yn_ptr == 'N'){
-        cout<< "\e[1;32m""  File saved without any changes""\e[0m"<<endl; 
+        cout<< "\033[1;32m""  File saved without any changes""\033[0m"<<endl; 
     }
     else{
-        cout <<"\e[1;31m""  Invalid Input""\e[0m"<<endl;
+        cout <<"\033[1;31m""  Invalid Input""\033[0m"<<endl;
     }
 
     delete yn_ptr;

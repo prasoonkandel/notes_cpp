@@ -111,6 +111,7 @@ int getChoice(){
     }
     return choice;
 }
+
 void createFile(string filename){
 
     bool exists = fileExists(filename);
@@ -141,9 +142,12 @@ void readFile(string filename){
         ifstream file(path);
         string line;
         cout<<"\033[1m""File content: ""\033[0m"<<endl;
+        int line_no = 1;
         while(getline(file, line)){
             isEmpty = false;
+            cout<<line_no<<" ";
             cout<<line<<endl;
+            line_no++;
         }
         if(isEmpty){
             cout<<"\033[1;31m""(File is empty)""\033[0m"<<endl;
@@ -176,18 +180,22 @@ void writeFile(string filename){
         }
         cout<< "  Write File content here (END for exit): "<<endl;
         bool writting = true;
-        string *temp_line = new string;;
+        string *temp_line = new string;
+        int line_no = 1;
         while(writting){
+            
             getline(cin, *temp_line);
-            if(*temp_line == "END"){
+            if(*temp_line == "END" || *temp_line == "end"){
                 writting = false;
                 break;
             }
+            cout<<line_no<<" ";
             file<<*temp_line<<endl;
+            line_no++;
         }
         delete temp_line;
         file.close();
-    } 
+    }
     else if(*yn_ptr == 'n' || *yn_ptr == 'N'){
         cout<< "\033[1;32m""  File saved without any changes""\033[0m"<<endl; 
     }

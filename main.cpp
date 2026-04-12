@@ -65,7 +65,7 @@ int main() {
             break;    
 
         case 5:
-            cout<<"Bye!\n";
+            cout<<"  Thanks for using notes_cpp. Developer's Info: https://prasoonkandel.com/\n";
             appRunning = false;
             break;
 

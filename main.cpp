@@ -31,7 +31,8 @@ int main() {
         cout << "| 2. Write File                          |\n";
         cout << "| 3. Read File                           |\n";
         cout << "| 4. List Files                          |\n";
-        cout << "| 5. Exit                                |\n";
+        cout << "| 5. Delete File                         |\n";
+        cout << "| 6. Exit                                |\n";
         margin();
         cout << "  Enter your choice: ";
         choice = getChoice();
@@ -65,6 +66,13 @@ int main() {
             break;    
 
         case 5:
+            cout << "  Enter file name:  ";
+            getline(cin, filename);
+            margin();
+            deleteFile(filename);
+            break;
+
+        case 6:
             cout<<"  Thanks for using notes_cpp. Developer's Info: https://prasoonkandel.com/\n";
             appRunning = false;
             break;

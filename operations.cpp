@@ -171,3 +171,22 @@ void listFiles(){
         getline(cin, dummy);
     }
 }
+
+void deleteFile(string filename){
+	bool exists = fileExists(filename);
+
+ 	if(!exists){
+        cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
+        return;
+    }
+
+    string path = getBaseDir() + filename;
+
+    if(fs::remove(path)){
+    	cout <<"\033[1;32m""  File deleted successfully.""\033[0m"<<endl;
+    }
+    else{
+    	cout <<"\033[1;31m""  Unexpected error occurred""\033[0m"<<endl;
+    }
+
+}

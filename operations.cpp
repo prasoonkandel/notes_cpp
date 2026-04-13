@@ -78,39 +78,6 @@ void createFile(string filename){
 }
 
 
-void readFile(string filename){
-    if(filename == ""){
-        cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
-        return;
-    }
-    bool exists = fileExists(filename);
-    bool isEmpty = true;
-    if (!exists){
-        cout << "\033[1;31m""  File doesn't exist""\033[0m"<<endl;
-    }
-    else{
-        string path = getBaseDir()+filename;
-        ifstream file(path);
-        string line;
-        cout<<"\033[1m""File content: ""\033[0m"<<endl;
-        int line_no = 1;
-        while(getline(file, line)){
-            isEmpty = false;
-            cout<<line_no<<" ";
-            cout<<line<<endl;
-            line_no++;
-        }
-        if(isEmpty){
-            cout<<"\033[1;31m""(File is empty)""\033[0m"<<endl;
-        }
-
-        margin();
-        cout << "\033[1;32m""  File Read successfully.""\033[0m"<<endl;
-    }
-    
-
-}
-
 void writeFile(string filename){
 
     if(filename == ""){
@@ -163,6 +130,39 @@ void writeFile(string filename){
     }
 
     delete yn_ptr;
+}
+
+void readFile(string filename){
+    if(filename == ""){
+        cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
+        return;
+    }
+    bool exists = fileExists(filename);
+    bool isEmpty = true;
+    if (!exists){
+        cout << "\033[1;31m""  File doesn't exist""\033[0m"<<endl;
+    }
+    else{
+        string path = getBaseDir()+filename;
+        ifstream file(path);
+        string line;
+        cout<<"\033[1m""File content: ""\033[0m"<<endl;
+        int line_no = 1;
+        while(getline(file, line)){
+            isEmpty = false;
+            cout<<line_no<<" ";
+            cout<<line<<endl;
+            line_no++;
+        }
+        if(isEmpty){
+            cout<<"\033[1;31m""(File is empty)""\033[0m"<<endl;
+        }
+
+        margin();
+        cout << "\033[1;32m""  File Read successfully.""\033[0m"<<endl;
+    }
+    
+
 }
 
 void listFiles(){

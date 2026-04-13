@@ -7,7 +7,6 @@
 #include <vector>
 
 // Including Operations Header File
-
 #include "operations.hpp"
 
 // Namespaces
@@ -49,7 +48,6 @@ int getChoice(){
 }
 
 // Margin 
-
 void margin(){
     cout << "==========================================\n";
 }

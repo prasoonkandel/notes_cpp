@@ -21,6 +21,7 @@ int main() {
     cout<<"\033[1;36m";
         cout << "#==============  NOTES CPP  ==============#\n";
     cout<<"\033[0m"<<endl;
+    
 // Event Loop
     while(appRunning){
         int choice = 0;

@@ -10,7 +10,6 @@ std::string getBaseDir();
 int getChoice();
 
 // Margin
-
 void margin();
 
 // File operations

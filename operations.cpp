@@ -152,6 +152,8 @@ void writeFile(string filename){
         }
         delete temp_line;
         file.close();
+        margin();
+        cout<< "\033[1;32m""  File overwritten successfully.""\033[0m"<<endl; 
     }
     else if(*yn_ptr == 'n' || *yn_ptr == 'N'){
         cout<< "\033[1;32m""  File saved without any changes""\033[0m"<<endl; 

@@ -23,12 +23,12 @@ bool fileExists(string filename){
 
 string getBaseDir(){
 
-	#ifdef _WIN32 
-		return string(getenv("USERPROFILE")) + "\\notes_cpp\\";
-	#else 
-		return string(getenv("HOME")) + "/notes_cpp/";
+    #ifdef _WIN32 
+        return string(getenv("USERPROFILE")) + "\\notes_cpp\\";
+    #else 
+        return string(getenv("HOME")) + "/notes_cpp/";
 
-	#endif	
+    #endif  
 
 }
 
@@ -50,11 +50,15 @@ int getChoice(){
 // Margin 
 
 void margin(){
-	cout << "==========================================\n";
+    cout << "==========================================\n";
 }
 
 //File Operations
 void createFile(string filename){
+    if(filename == ""){
+        cout <<"\033[1;31m"" Name of the file can't be empty.""\033[0m"<<endl;
+        return;
+    }
 
     bool exists = fileExists(filename);
 
@@ -75,6 +79,10 @@ void createFile(string filename){
 
 
 void readFile(string filename){
+    if(filename == ""){
+        cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
+        return;
+    }
     bool exists = fileExists(filename);
     bool isEmpty = true;
     if (!exists){
@@ -104,6 +112,12 @@ void readFile(string filename){
 }
 
 void writeFile(string filename){
+
+    if(filename == ""){
+        cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
+        return;
+    }
+
     bool exists = fileExists(filename);
     if(!exists){
         cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
@@ -173,9 +187,13 @@ void listFiles(){
 }
 
 void deleteFile(string filename){
-	bool exists = fileExists(filename);
+    if(filename == ""){
+        cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
+        return;
+    }
+    bool exists = fileExists(filename);
 
- 	if(!exists){
+    if(!exists){
         cout <<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
         return;
     }
@@ -183,10 +201,10 @@ void deleteFile(string filename){
     string path = getBaseDir() + filename;
 
     if(fs::remove(path)){
-    	cout <<"\033[1;32m""  File deleted successfully.""\033[0m"<<endl;
+        cout <<"\033[1;32m""  File deleted successfully.""\033[0m"<<endl;
     }
     else{
-    	cout <<"\033[1;31m""  Unexpected error occurred""\033[0m"<<endl;
+        cout <<"\033[1;31m""  Unexpected error occurred""\033[0m"<<endl;
     }
 
 }

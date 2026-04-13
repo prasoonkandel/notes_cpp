@@ -4,6 +4,7 @@
 #include <string>
 #include <filesystem>
 #include <limits>
+#include <vector>
 
 // Including Operations Header File
 
@@ -141,30 +142,114 @@ void readFile(string filename){
     bool isEmpty = true;
     if (!exists){
         cout << "\033[1;31m""  File doesn't exist""\033[0m"<<endl;
+        return;
     }
-    else{
-        string path = getBaseDir()+filename;
-        ifstream file(path);
-        string line;
-        cout<<"\033[1m""File content: ""\033[0m"<<endl;
-        int line_no = 1;
-        while(getline(file, line)){
-            isEmpty = false;
-            cout<<line_no<<" ";
-            cout<<line<<endl;
-            line_no++;
-        }
-        if(isEmpty){
-            cout<<"\033[1;31m""(File is empty)""\033[0m"<<endl;
-        }
 
-        margin();
-        cout << "\033[1;32m""  File Read successfully.""\033[0m"<<endl;
+    string path = getBaseDir()+filename;
+    ifstream file(path);
+    string line;
+    int line_no = 1;
+    while(getline(file, line)){
+        if(isEmpty){
+            cout<<"\033[1m""File content: ""\033[0m"<<endl;
+            isEmpty = false;
+        }
+        cout<<line_no<<" ";
+        cout<<line<<endl;
+        line_no++;
     }
+    if(isEmpty){
+        cout<<"\033[1;31m""(File is empty)""\033[0m"<<endl;
+        return;
+    }
+    margin();
+    cout << "\033[1;32m""  File Read successfully.""\033[0m"<<endl;
+ 
     
 
 }
 
+void editFile(string filename){
+    if (filename ==  ""){
+        cout<<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
+ 
+        return;
+    }
+
+    bool exists = fileExists(filename);
+
+    if(!exists){
+        cout<<"\033[1;31m""  File doesn't exist.""\033`[0m"<<endl;
+        return;
+    }
+    string path = getBaseDir() + filename;
+    ifstream file(path);
+    bool isEmpty = true;
+    vector<string> file_content;
+    string line;
+    int line_no = 1;
+    
+    while(getline(file, line)){
+        if(isEmpty){
+            cout<<"\033[1m""File content: ""\033[0m"<<endl;
+            isEmpty = false;
+        }
+        file_content.push_back(line);
+
+        cout<<line_no<<" ";
+        cout<<line<<endl;
+        line_no++;
+    }
+    
+    if(isEmpty){
+        cout<<"\033[1;31m""  (File is empty)""\033[0m"<<endl;
+        return;
+    }
+
+    file.close();
+
+    margin();
+    
+    int choice;
+    cout<<"  Enter the line number to edit: ";
+
+    while(!(cin>>choice)){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout<<"\033[1;31m""  Invalid Input (Must be a number)""\033[0m"<<endl;
+        cout<<"  Enter the line number to edit: ";
+    }
+
+    if(choice<=0 || choice > file_content.size()){
+        cout<<"\033[1;31m""  Line "<<choice<<" doesn't exist""\033[0m"<<endl;
+        return;
+    }
+
+    string old_content = file_content[choice-1];
+
+    cout<<endl;
+    cout<<"  Old content: "<<endl;
+    cout<<"  "<<old_content<<endl;
+    cout<<endl;
+    cout<<"  New content: "<<endl;
+    cout<<"  ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, file_content[choice-1]);
+
+    if(file_content[choice-1] == ""){
+        file_content.pop_back();
+    }
+
+    margin();
+                                                                                                                                                                                                         
+    ofstream file_write(path);
+
+    for(int i = 0; i<file_content.size(); i++){
+        file_write<<file_content[i]<<endl;
+    }
+
+    cout<<"\033[1;32m""  File edited successfully.""\033[0m"<<endl;
+}
 void listFiles(){
     string path = getBaseDir();
     if(fs::is_empty(path)){

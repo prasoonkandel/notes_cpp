@@ -4,7 +4,7 @@
 #include <string>
 #include <filesystem>
 #include <limits>
-
+#include <vector>
 #include "operations.hpp"
 
 // Namespaces
@@ -30,9 +30,10 @@ int main() {
         cout << "| 1. Create New File                     |\n";
         cout << "| 2. Write File                          |\n";
         cout << "| 3. Read File                           |\n";
-        cout << "| 4. List Files                          |\n";
-        cout << "| 5. Delete File                         |\n";
-        cout << "| 6. Exit                                |\n";
+        cout << "| 4. Edit Files                          |\n";
+        cout << "| 5. List Files                          |\n";
+        cout << "| 6. Delete File                         |\n";
+        cout << "| 7. Exit                                |\n";
         margin();
         cout << "  Enter your choice: ";
         choice = getChoice();
@@ -61,18 +62,25 @@ int main() {
             readFile(filename);
             break;
 
-        case 4: 
+        case 4:
+            cout << "  Enter file name:  ";
+            getline(cin, filename);
+            margin();
+            editFile(filename);
+            break;
+
+        case 5: 
             listFiles();
             break;    
 
-        case 5:
+        case 6:
             cout << "  Enter file name:  ";
             getline(cin, filename);
             margin();
             deleteFile(filename);
             break;
 
-        case 6:
+        case 7:
             cout<<"  Thanks for using notes_cpp. Developer's Info: https://prasoonkandel.com/\n";
             appRunning = false;
             break;
@@ -83,4 +91,3 @@ int main() {
     return 0;
 }
 
-// Secondary Functions

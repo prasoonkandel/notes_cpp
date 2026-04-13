@@ -17,8 +17,8 @@ void margin();
 void createFile(std::string filename);
 void writeFile(std::string filename);
 void readFile(std::string filename);
+void editFile(std::string filename);
 void listFiles();
 void deleteFile(std::string filename);
-
 
 #endif

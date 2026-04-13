@@ -177,7 +177,7 @@ void editFile(string filename){
     bool exists = fileExists(filename);
 
     if(!exists){
-        cout<<"\033[1;31m""  File doesn't exist.""\033`[0m"<<endl;
+        cout<<"\033[1;31m""  File doesn't exist.""\033[0m"<<endl;
         return;
     }
     string path = getBaseDir() + filename;
@@ -235,7 +235,7 @@ void editFile(string filename){
     getline(cin, file_content[choice-1]);
 
     if(file_content[choice-1] == ""){
-        file_content.pop_back();
+        file_content.erase(file_content.begin() + (choice - 1));
     }
 
     margin();

@@ -93,6 +93,7 @@ void writeFile(string filename){
     cout<<"  Do you want to overwrite it? (y/n): ";
     char *yn_ptr = new char;
     cin>>*yn_ptr;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     margin();
     if (*yn_ptr == 'y' || *yn_ptr == 'Y'){
         string path = getBaseDir()+filename;
@@ -106,13 +107,12 @@ void writeFile(string filename){
         string *temp_line = new string;
         int line_no = 1;
         while(writting){
-            
+            cout<<line_no<<" ";
             getline(cin, *temp_line);
             if(*temp_line == "END" || *temp_line == "end"){
                 writting = false;
                 break;
             }
-            cout<<line_no<<" ";
             file<<*temp_line<<endl;
             line_no++;
         }
@@ -186,7 +186,7 @@ void editFile(string filename){
     vector<string> file_content;
     string line;
     int line_no = 1;
-    
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while(getline(file, line)){
         if(isEmpty){
             cout<<"\033[1m""File content: ""\033[0m"<<endl;

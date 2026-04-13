@@ -2,7 +2,7 @@
 
 **Notes Cpp** is a simple terminal-based notes app built with C++.
 
-### Latest Release: v1.2
+### Latest Release: v1.1
 
 ## Features
 
@@ -17,10 +17,6 @@
 
 - Linux/macOS/Windows
 - C++17 compatible compiler (`g++` recommended)
-
-## Storage Location
-
-The app stores notes in a folder named `notes_cpp` inside your home directory.
 
 ## Usage
 
@@ -57,3 +53,13 @@ Use the main menu to choose one of the following options:
 **7. Exit**
 
 - Exiting the program.
+
+## Storage Location
+
+The app stores notes in a folder named `notes_cpp` inside your home directory.
+
+## Folder Structure:
+
+The folder structure of this project is shown in the image below:
+
+![Folder Structure](./folder_structure.png)

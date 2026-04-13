@@ -12,7 +12,6 @@
 - List all files currently stored in the notes directory
 - Delete an existing file from the project directory.
 
-
 ## Requirements
 
 - Linux/macOS/Windows

@@ -9,6 +9,7 @@
 - Create a new file if it does not already exist
 - Write content to an existing file (overwrite mode)
 - Read and display saved file content in the terminal
+- Edit the specific line of the file
 - List all files currently stored in the notes directory
 - Delete an existing file from the project directory.
 
@@ -41,14 +42,18 @@ Use the main menu to choose one of the following options:
 
 - Read and display saved file content in the terminal
 
-**4. List Files**
+**4. Edit File**
+
+- Edit the specific line of the file
+
+**5. List Files**
 
 - List all files currently stored in the notes directory
 
-**5. Delete File**
+**6. Delete File**
 
 - Delete an existing file from the project directory.
 
-**6. Exit**
+**7. Exit**
 
 - Exiting the program.

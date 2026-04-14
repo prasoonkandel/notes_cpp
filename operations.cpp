@@ -186,7 +186,6 @@ void editFile(string filename){
     vector<string> file_content;
     string line;
     int line_no = 1;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while(getline(file, line)){
         if(isEmpty){
             cout<<"\033[1m""File content: ""\033[0m"<<endl;

@@ -4,6 +4,8 @@
 
 ### Latest Release: v1.2
 
+[![Demo Video](https://img.shields.io/badge/Demo-Video-1DA1F2?style=for-the-badge&logo=x&logoColor=white)](https://x.com/PrasoonKandel/status/2043746181633941980?s=20)
+
 ## Features
 
 - Create a new file if it does not already exist

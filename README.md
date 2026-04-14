@@ -4,7 +4,9 @@
 
 ### Latest Release: v1.2
 
-[![Demo Video](https://img.shields.io/badge/Demo-Video-1DA1F2?style=for-the-badge&logo=x&logoColor=white)](https://x.com/PrasoonKandel/status/2043746181633941980?s=20)
+![Demo Video](https://x.com/PrasoonKandel/status/2043746181633941980?s=20)
+
+![Fork Repo](https://github.com/prasoonkandel/notes_cpp/fork)
 
 ## Features
 
@@ -65,3 +67,9 @@ The app stores notes in a folder named `notes_cpp` inside your home directory.
 The folder structure of this project is shown in the image below:
 
 ![Folder Structure](./folder_structure.png)
+
+# Build Command:
+
+```bash
+g++ -std=c++17 -o notes_cpp main.cpp operations.cpp
+```

@@ -5,7 +5,7 @@ It can be used to make quick notes from terminal.
 
 ### Latest Release: v1.2
 
-![Demo Video](https://x.com/PrasoonKandel/status/2043746181633941980?s=20)
+<a href="https://x.com/PrasoonKandel/status/2043746181633941980?s=20"> Demo Video </a>
 
 ![Fork Repo](https://github.com/prasoonkandel/notes_cpp/fork)
 
